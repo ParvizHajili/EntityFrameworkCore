@@ -5,7 +5,9 @@ VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeFirst", "CodeFirst\CodeFirst.csproj", "{361A3F8F-FA92-40E1-972D-1BE8CB5C76A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersistingTheData", "PersistingTheData\PersistingTheData.csproj", "{F6724D6F-B475-4F4A-9B77-8BE034CDC00D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersistingTheData", "PersistingTheData\PersistingTheData.csproj", "{F6724D6F-B475-4F4A-9B77-8BE034CDC00D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersistingTheDataUpdate", "PersistingTheDataUpdate\PersistingTheDataUpdate.csproj", "{E98C8F28-7698-4E11-828F-2045575FC9A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{F6724D6F-B475-4F4A-9B77-8BE034CDC00D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6724D6F-B475-4F4A-9B77-8BE034CDC00D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6724D6F-B475-4F4A-9B77-8BE034CDC00D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E98C8F28-7698-4E11-828F-2045575FC9A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E98C8F28-7698-4E11-828F-2045575FC9A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E98C8F28-7698-4E11-828F-2045575FC9A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E98C8F28-7698-4E11-828F-2045575FC9A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
