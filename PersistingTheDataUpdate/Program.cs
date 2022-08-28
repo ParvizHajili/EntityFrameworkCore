@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
-//Console.WriteLine("Hello, World!");
+Console.WriteLine("Hello, World!");
 
 #region Update Data
 //ExampleDbContext context = new();

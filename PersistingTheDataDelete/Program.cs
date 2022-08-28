@@ -1,8 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-//Console.WriteLine("Hello, World!");
-
+Console.WriteLine("Hello, World!");
 #region Delete
 //ExampleDbContext context = new();
 //var product = await context.Products.FirstOrDefaultAsync(x => x.Id == 1549858);
