@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Microsoft.EntityFrameworkCore;
 
-Console.WriteLine("hello World");
+Console.WriteLine("Hello World");
 ExampleDbContontext context = new();
 
 #region Basic Query
@@ -35,6 +35,54 @@ ExampleDbContontext context = new();
 //    Console.WriteLine(item.Name);
 //}
 
+#endregion
+
+#region Where
+#region MethodSyntax
+//var products = context.Products.Where(i => i.Name.StartsWith("a")).ToList(); //like query
+//var products = context.Products.Where(i => i.Id >= 500).ToList();
+//foreach (var product in products)
+//{
+//    Console.WriteLine(product.Name);
+//}
+#endregion
+#region QuerySyntax
+//var products = from product in context.Products
+//               where product.Id >100 && product.Id<150
+//               select product;
+//foreach (var product in products)
+//{
+//    Console.WriteLine(product.Name);
+//}
+#endregion
+#endregion
+
+#region OrderBy
+//sorğu üzərində sıralama etməyimizi təmin edir.(Ascending)
+#region Method Syntax
+//var products = context.Products.Where(x => x.Id > 700 || x.Name.EndsWith("2")).OrderBy(i=>i.Name);
+//products.ToList();
+#endregion
+#region Query Syntax
+//var products = from product in context.Products
+//               where product.Id>500|| product.Name.EndsWith("2")
+//               orderby product.Name
+//               select product;
+//products.ToList();
+#endregion
+#endregion
+
+#region ThenBy
+//orderyBy üzərində olan sorğuları fərqli columnlara da tətbiq etməyimizi təmin edir.(Ascending)
+
+//var products = context.Products.Where(i => i.Id > 100 && i.Name.EndsWith("2"))
+//    .OrderBy(i => i.Name)
+//    .ThenBy(i => i.Price)
+//    .ThenBy(i => i.Id).ToList();
+//foreach (var product in products)
+//{
+//    Console.WriteLine(product.Name);
+//}
 #endregion
 
 Console.ReadLine();
