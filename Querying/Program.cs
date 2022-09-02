@@ -85,6 +85,88 @@ ExampleDbContontext context = new();
 //}
 #endregion
 
+#region Single and SingleOrDefault
+/*Əgər sorğuda bizə yalnız 1 datanı gətirmək lazıdırsa bu zaman Single və ya SingleOrDefault istifadə
+ edilə bilər. */
+#region SingleAsync
+//Sorğu nəticəsində birdən çox data gəlirsə və ya heç gəlmirsə hər iki variantda da exception atır.
+#region One Record
+//var product = await context.Products.SingleAsync(i=>i.Id==101);
+#endregion
+#region No Record
+//var product = await context.Products.SingleAsync(i => i.Id == 2000);
+//System.InvalidOperationException
+#endregion
+#region Many Records
+//var product = await context.Products.SingleAsync(i => i.Id >100);
+//System.InvalidOperationException
+#endregion
+#endregion
+
+#region SingleOrDefault
+//Sorğu nəticəsində birdən çox data gəlirsə exception atır.Heç gəlmirsə null qaytarır.
+#region One Record
+//var product = await context.Products.SingleOrDefaultAsync(i=>i.Id==101);
+#endregion
+#region No Record
+//var product = await context.Products.SingleOrDefaultAsync(i=>i.Id==9999);
+//System.NullReferenceException
+#endregion
+#region Many Records
+//var product = await context.Products.SingleOrDefaultAsync(i => i.Id >= 50);
+//System.InvalidOperationException
+#endregion
+#endregion
+#endregion
+
+#region First and FirstOrDefaultAsync
+//Edilen sorguda tek bir datanin gelmeyi lazimdirsa first ve ya firstordefault istifade olunur.
+#region First
+//Sorgu neticesinde elde edilen datalardan ilkini getirir.Eger hec data gelmese exception atar.
+#region One Record
+//var product = context.Products.First(p => p.Id == 120);
+#endregion
+#region No Record
+//var product = context.Products.First(p => p.Id == 12000);
+//System.InvalidOperationException
+#endregion
+#region Many Records
+//var product = context.Products.First(p => p.Id >110 && p.Id<500);
+#endregion
+#endregion
+
+#region FirstOrDefault
+//Sorgu neticeside elde olunan datalardan ilkini getirir. Eger ki data gelmese null qaytaracaq.
+#region One Record
+//var product = context.Products.FirstOrDefault(p => p.Id ==500);
+#endregion
+#region No Record
+//var product = context.Products.FirstOrDefault(p => p.Id ==9999);
+//null
+#endregion
+#region Many Records
+//var product = context.Products.FirstOrDefault(p => p.Id > 110 && p.Id < 500);
+#endregion
+#endregion
+#endregion
+
+#region Find
+//Find funksiyası primary key-ə görə sorğulama edir
+
+//var product = context.Products.Find(50);
+#region Composite Primary Key
+//var product = context.ProductPieces.Find(4, 2);
+#endregion
+#endregion
+
+#region Last
+//gələn sorğudan sondakı datanı gətirir.
+//var product = context.Products.OrderBy(i=>i.Name).Last(i => i.Id > 50);
+#endregion
+#region LastOrDefault
+//var product = context.Products.OrderBy(i => i.Name).LastOrDefault(i => i.Id > 1);
+#endregion
+
 Console.ReadLine();
 public class ExampleDbContontext : DbContext
 {
@@ -93,8 +175,14 @@ public class ExampleDbContontext : DbContext
         optionsBuilder.UseSqlServer("Server = Localhost; Database = ExampleDb; Integrated Security = true;");
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<ProductPiece>().HasKey(i => new { i.ProductId, i.PieceId });
+    }
+
     public DbSet<Product> Products { get; set; }
     public DbSet<Piece> Pieces { get; set; }
+    public DbSet<ProductPiece> ProductPieces { get; set; }
 }
 
 public class Product
@@ -109,6 +197,14 @@ public class Piece
 {
     public int Id { get; set; }
     public string Name { get; set; }
+}
+
+public class ProductPiece
+{
+    public int ProductId { get; set; }
+    public int PieceId { get; set; }
+    public Product Product { get; set; }
+    public Piece Piece { get; set; }
 }
 
 
@@ -132,3 +228,15 @@ public class Piece
 //    context.AddRange(piece);
 //}
 //context.SaveChanges();
+
+
+
+#region One Record
+
+#endregion
+#region No Record
+
+#endregion
+#region Many Records
+
+#endregion
