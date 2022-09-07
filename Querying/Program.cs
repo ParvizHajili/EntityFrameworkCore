@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 Console.WriteLine("Hello World");
 ExampleDbContontext context = new();
-
+#region M1
 #region Basic Query
 #region Method syntax
 //var products = await context.Products.ToListAsync();
@@ -19,7 +19,6 @@ ExampleDbContontext context = new();
 
 //var products = await (from product in context.Products select product).ToListAsync();
 #endregion
-
 
 #region Deferred Execution
 //IQueryable sorğularinda əlaqəli kod yazıldığı yerdə tətiklənməz.Yəni kod yazıldığı yerdə sorğunu generate olunmaz.
@@ -166,7 +165,54 @@ ExampleDbContontext context = new();
 #region LastOrDefault
 //var product = context.Products.OrderBy(i => i.Name).LastOrDefault(i => i.Id > 1);
 #endregion
+#endregion
 
+#region M2
+
+#region CountAsync
+//Sorğu execute edilərkən neçə ədəd sətirin ələ ediləcəyi rəqəm olaraq(int) bizlərə bildirir.
+//var productCount = await context.Products.CountAsync();
+#endregion
+
+#region LongCount
+//Sorğu execute edilərkən neçə ədəd sətirin ələ ediləcəyi rəqəm olaraq(long) bizlərə bildirir.
+//var productsCount = context.Products.LongCount();
+//var productsCount = context.Products.LongCount(x=>x.Id<400);
+#endregion
+
+#region Any
+//Sorğu nəticəsində datanın gəlib gəlmədiyini göstərir.(bool)
+//var IsExist =await context.Products.AnyAsync();
+#endregion
+
+#region Max
+//var price = context.Products.Max(p => p.Price);
+#endregion
+
+#region Distinct
+//Sorğuda təkrar rekordlar  varsa bunları təkləşdirən bir əməliyyata sahibdir.
+//var product = context.Products.Distinct().ToList();
+#endregion
+
+#region AllAssync
+//bir sorgu neticesinde gelen datalarin verilen sertde olub olmadigini gosterir.True false qaytarir
+//var product = await context.Products.AllAsync(i => i.Price > 1000);
+#endregion
+
+#region Sum
+//Vermis oldugumuz reqemsal propertinin cemini hesablayir.
+//var sum = context.Products.Sum(u => u.Price);
+#endregion
+
+#region AvarageAsync
+//var avarage = await context.Products.AverageAsync(x=>x.Price);
+#endregion
+
+#region Contains
+//Like sorgusu yaratmagimizi temin edir.
+//var products = context.Products.Where(p => p.Name.Contains("P")).ToList();
+#endregion
+#endregion
 Console.ReadLine();
 public class ExampleDbContontext : DbContext
 {
