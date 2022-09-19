@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 Console.WriteLine("Hello World");
 ExampleDbContontext context = new();
@@ -213,6 +214,56 @@ ExampleDbContontext context = new();
 //var products = context.Products.Where(p => p.Name.Contains("P")).ToList();
 #endregion
 #endregion
+
+#region M3
+#region ToDictionary
+/*sorgu neticesinde gelen datani bir dictionary olaraq elde etmek/tutmaq istesek istifade edilir.
+ Tolist ile eyni meqsedde istifade olunur.Yeni yaradilan sorgu neticesinde datani execute
+ edib neticeni aliriq
+Tolist:Gelen sorgu neticesinde entity tipinde bir kolleksiona(List<TEntity>) cevirir
+ToDictionary ise:Gelen sorgu neticesinde Dictionary tipinden bir kolleksiyaya cevirir.
+ */
+//var products = await context.Products.ToDictionaryAsync(x=>x.Name,x=>x.Price);
+#endregion
+
+#region ToArray
+/*Yaradilan sorgunu massiv olaraq elde eder.
+ * ToList ile eyni meqsedlidir.Yeni sorgu execute olunur ancaq gelen data massiv olaraq elde edilir.
+ */
+
+//var products = context.Products.ToArray();
+#endregion
+
+#region Select
+/*
+ Select funksiyasinin funksional birden cox davranisi var.
+1)Select generate edilecek sorgunun getirilecek columnlari-nin tenzimlenmesini temin edir. 
+ */
+//var products = context.Products.Select(x =>new Product
+//{
+//    Id = x.Id,
+//    Price = x.Price,
+//}).ToList();
+
+//var products = context.Products.Select(p => new ProductDetail
+//{
+//    Id = p.Id,
+//    Price = p.Price
+//});
+
+#endregion
+
+#region SelectMany
+//Select ilə eyni məqsədidir.Əlaqəli tablelər nəticəsində gələn dataları təkləşdirmyimizi təmin edir.
+
+//var products =context.Products.Include(p => p.Pieces).SelectMany(p => p.Pieces, (p, pc) => new
+//{
+//    p.Id,
+//    p.Price,
+//    pc.Name
+//}).ToList();
+#endregion
+#endregion
 Console.ReadLine();
 public class ExampleDbContontext : DbContext
 {
@@ -251,6 +302,12 @@ public class ProductPiece
     public int PieceId { get; set; }
     public Product Product { get; set; }
     public Piece Piece { get; set; }
+}
+
+public class ProductDetail
+{
+    public int Id { get; set; }
+    public float Price { get; set; }
 }
 
 
