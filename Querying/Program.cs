@@ -264,6 +264,29 @@ ToDictionary ise:Gelen sorgu neticesinde Dictionary tipinden bir kolleksiyaya ce
 //}).ToList();
 #endregion
 #endregion
+
+
+#region GroupBy
+#region Method Syntax
+//var datas = context.Products.GroupBy(p => p.Price).Select(group => new
+//{
+//    Count = group.Count(),
+//    Price = group.Key
+//}).ToList();
+#endregion
+#region Query Syntax
+//var datas = (from product in context.Products
+//            group product by product.Price
+//            into @group
+//            select new
+//            {
+//                Price =@group.Key,
+//                Count =@group.Count()
+//            }).ToList();
+#endregion
+#endregion
+
+
 Console.ReadLine();
 public class ExampleDbContontext : DbContext
 {
